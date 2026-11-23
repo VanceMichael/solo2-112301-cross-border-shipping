@@ -1,0 +1,206 @@
+{
+  "title": "跨境件组 SLA、生存时效与备用运力",
+  "source_note": "本文件中的机构、事件、规则和数值均为人工构造的本地合成资料。",
+  "contract": "manifest 为件与箱的有效归属区间，日期按 UTC，weight_kg 为实际重。scan 的 known_at 为接收日，status 含 transfer、held、released、delivered。service 的 eligible_ceiling_h 为违约期限，excused_hold 为 1 才扣经确认的海关扣留。capacity 分 slot、route、common_leg 保存件与重量库存。booking 的 confirmed 会占用库存。",
+  "tables": {
+    "manifest": [
+      {
+        "order": "O1",
+        "parcel": "I1",
+        "box": "B1",
+        "from_day": "2026-07-01",
+        "to_day": "~",
+        "weight_kg": "2"
+      },
+      {
+        "order": "O1",
+        "parcel": "I2",
+        "box": "B1",
+        "from_day": "2026-07-01",
+        "to_day": "2026-07-04",
+        "weight_kg": "5"
+      },
+      {
+        "order": "O1",
+        "parcel": "I2",
+        "box": "B3",
+        "from_day": "2026-07-04",
+        "to_day": "~",
+        "weight_kg": "5"
+      },
+      {
+        "order": "O1",
+        "parcel": "I3",
+        "box": "B2",
+        "from_day": "2026-07-01",
+        "to_day": "~",
+        "weight_kg": "4"
+      },
+      {
+        "order": "O2",
+        "parcel": "I4",
+        "box": "B4",
+        "from_day": "2026-06-20",
+        "to_day": "~",
+        "weight_kg": "3"
+      },
+      {
+        "order": "O3",
+        "parcel": "I5",
+        "box": "B5",
+        "from_day": "2026-06-22",
+        "to_day": "~",
+        "weight_kg": "7"
+      },
+      {
+        "order": "O4",
+        "parcel": "I6",
+        "box": "B6",
+        "from_day": "2026-06-21",
+        "to_day": "~",
+        "weight_kg": "2"
+      }
+    ],
+    "scan": [
+      {
+        "subject": "B1",
+        "at": "2026-07-05",
+        "known_at": "2026-07-05",
+        "route": "R1",
+        "status": "delivered"
+      },
+      {
+        "subject": "B3",
+        "at": "2026-07-04",
+        "known_at": "2026-07-05",
+        "route": "R1",
+        "status": "held"
+      },
+      {
+        "subject": "B3",
+        "at": "2026-07-06",
+        "known_at": "2026-07-07",
+        "route": "R1",
+        "status": "released"
+      },
+      {
+        "subject": "B2",
+        "at": "2026-07-04",
+        "known_at": "2026-07-04",
+        "route": "R1",
+        "status": "transfer"
+      },
+      {
+        "subject": "B4",
+        "at": "2026-06-25",
+        "known_at": "2026-06-26",
+        "route": "R1",
+        "status": "delivered"
+      },
+      {
+        "subject": "B5",
+        "at": "2026-06-25",
+        "known_at": "2026-06-27",
+        "route": "R2",
+        "status": "delivered"
+      },
+      {
+        "subject": "B6",
+        "at": "2026-06-23",
+        "known_at": "2026-06-25",
+        "route": "R1",
+        "status": "lost"
+      }
+    ],
+    "orders": [
+      {
+        "id": "O1",
+        "promised_day": "2026-07-07",
+        "tender_day": "2026-07-01",
+        "clearance": "routine",
+        "route": "R1"
+      },
+      {
+        "id": "O2",
+        "promised_day": "2026-06-25",
+        "tender_day": "2026-06-20",
+        "clearance": "routine",
+        "route": "R1"
+      },
+      {
+        "id": "O3",
+        "promised_day": "2026-06-24",
+        "tender_day": "2026-06-22",
+        "clearance": "routine",
+        "route": "R2"
+      },
+      {
+        "id": "O4",
+        "promised_day": "2026-06-25",
+        "tender_day": "2026-06-21",
+        "clearance": "routine",
+        "route": "R1"
+      }
+    ],
+    "capacity": [
+      {
+        "slot": "K1",
+        "route": "R2",
+        "common_leg": "ocean17",
+        "remaining_items": "2",
+        "remaining_weight": "7",
+        "cutoff": "2026-07-07"
+      },
+      {
+        "slot": "K2",
+        "route": "R3",
+        "common_leg": "ocean17",
+        "remaining_items": "2",
+        "remaining_weight": "8",
+        "cutoff": "2026-07-07"
+      },
+      {
+        "slot": "K3",
+        "route": "R4",
+        "common_leg": "rail4",
+        "remaining_items": "1",
+        "remaining_weight": "6",
+        "cutoff": "2026-07-06"
+      }
+    ],
+    "booking": [
+      {
+        "id": "X1",
+        "slot": "K1",
+        "parcel": "I4",
+        "state": "confirmed"
+      }
+    ],
+    "service": [
+      {
+        "route": "R1",
+        "carrier": "A",
+        "eligible_ceiling_h": "120",
+        "excused_hold": "1"
+      },
+      {
+        "route": "R2",
+        "carrier": "B",
+        "eligible_ceiling_h": "96",
+        "excused_hold": "0"
+      },
+      {
+        "route": "R3",
+        "carrier": "C",
+        "eligible_ceiling_h": "96",
+        "excused_hold": "1"
+      },
+      {
+        "route": "R4",
+        "carrier": "D",
+        "eligible_ceiling_h": "144",
+        "excused_hold": "0"
+      }
+    ]
+  }
+}
